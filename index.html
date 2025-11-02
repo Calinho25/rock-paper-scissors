@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 3 buttons -->
+    <input class=rock type="button" value="rock">
+    <input class=paper type="button" value="paper">
+    <input class=scissors type="button" value="scissors">
+    <p></p>
+    <script>
+        const input = document.querySelector(".rock", ".paper", "scissors");
+        const para = document.querySelector(`p`);
+        /* make the variations */
+        let items = ["Rock", "Paper", "Scissors"];
+        function randomSelect (items){
+        const random = Math.floor(Math.random()*items.length);
+        return items[random];
+        }
+        /* when a button is pressed a random word selector run for the 3 words */
+        document.querySelector(".rock").addEventListener("click", () => {
+            /* save the results to variables */
+            let buttonPressed = "Rock";
+            let aiSelection = randomSelect (items)
+            /* rock>paper>scissors>rock */
+            /* display the result you win or you lose */
+            if (aiSelection===buttonPressed){
+                para.textContent = "ROCK! Draw, try again sucka!";
+            } else {if(aiSelection==="Paper"){
+                para.textContent = "PAPER! HAHA you lose! and you smell like a dingus!";
+            } else{
+                para.textContent = "SCISSORS! You got lucky and beat me this time... loser..."
+            }}
+        })
+         document.querySelector(".paper").addEventListener("click", () => {
+            let buttonPressed = "Paper";
+            let aiSelection = randomSelect (items)
+            if (aiSelection===buttonPressed){
+                para.textContent = "PAPER! Draw, try again sucka!";
+            } else {if(aiSelection==="Scissors"){
+                para.textContent = "SCISSORS! HAHA you lose! and you smell like a dingus!";
+            } else{
+                para.textContent = "ROCK! You got lucky and beat me this time... loser..."
+            }}
+        })
+        document.querySelector(".scissors").addEventListener("click", () => {
+            let buttonPressed = "Scissors";
+            let aiSelection = randomSelect (items)
+            if (aiSelection===buttonPressed){
+                para.textContent = "SCISSORS! Draw, try again sucka!";
+            } else {if(aiSelection==="Rock"){
+                para.textContent = "ROCK! HAHA you lose! and you smell like a dingus!";
+            } else{
+                para.textContent = "PAPER! You got lucky and beat me this time... loser..."
+            }}
+        })
+        
+    </script>
+</body>
+</html>
