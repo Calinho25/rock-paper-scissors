@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- 3 buttons -->
-    <input class=rock type="button" value="rock">
-    <input class=paper type="button" value="paper">
-    <input class=scissors type="button" value="scissors">
+    <div class="buttons">
+        <input class=rock type="button" value="rock">
+        <input class=paper type="button" value="paper">
+        <input class=scissors type="button" value="scissors">
+    </div>
+    <div id="computerScore";>Computer: 0</div>
+    <div id="humanScore";>You: 0</div>
     <p></p>
     <script>
         const input = document.querySelector(".rock", ".paper", "scissors");
         const para = document.querySelector(`p`);
+        let computerScoreDisplay = document.querySelector("#computerScore");
+        let humanScoreDisplay = document.querySelector("#humanScore");
+        /* value is updated with each win */
+        let computerScoreValue = 0;
+        let humanScoreValue = 0;
+
         /* make the variations */
         let items = ["Rock", "Paper", "Scissors"];
         function randomSelect (items){
@@ -26,13 +37,21 @@
             let buttonPressed = "Rock";
             let aiSelection = randomSelect (items)
             /* rock>paper>scissors>rock */
-            /* display the result you win or you lose */
             if (aiSelection===buttonPressed){
                 para.textContent = "ROCK! Draw, try again sucka!";
-            } else {if(aiSelection==="Paper"){
+                computerScoreValue++;
+                humanScoreValue++;
+                 /* display the result you win or you lose */
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
+            } else {if(aiSelection==="Paper"){                
                 para.textContent = "PAPER! HAHA you lose! and you smell like a dingus!";
+                computerScoreValue++;
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
             } else{
-                para.textContent = "SCISSORS! You got lucky and beat me this time... loser..."
+                para.textContent = "SCISSORS! You got lucky and beat me this time... loser...";
+                humanScoreValue++;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
             }}
         })
          document.querySelector(".paper").addEventListener("click", () => {
@@ -40,10 +59,18 @@
             let aiSelection = randomSelect (items)
             if (aiSelection===buttonPressed){
                 para.textContent = "PAPER! Draw, try again sucka!";
+                computerScoreValue++;
+                humanScoreValue++;
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
             } else {if(aiSelection==="Scissors"){
                 para.textContent = "SCISSORS! HAHA you lose! and you smell like a dingus!";
+                computerScoreValue++;
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
             } else{
-                para.textContent = "ROCK! You got lucky and beat me this time... loser..."
+                para.textContent = "ROCK! You got lucky and beat me this time... loser...";
+                humanScoreValue++;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
             }}
         })
         document.querySelector(".scissors").addEventListener("click", () => {
@@ -51,10 +78,18 @@
             let aiSelection = randomSelect (items)
             if (aiSelection===buttonPressed){
                 para.textContent = "SCISSORS! Draw, try again sucka!";
+                computerScoreValue++;
+                humanScoreValue++;
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
             } else {if(aiSelection==="Rock"){
                 para.textContent = "ROCK! HAHA you lose! and you smell like a dingus!";
+                computerScoreValue++;
+                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
             } else{
-                para.textContent = "PAPER! You got lucky and beat me this time... loser..."
+                para.textContent = "PAPER! You got lucky and beat me this time... loser...";
+                humanScoreValue++;
+                humanScoreDisplay.textContent = "You: "+humanScoreValue;
             }}
         })
         
