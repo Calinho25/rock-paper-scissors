@@ -15,84 +15,77 @@
     </div>
     <div id="computerScore";>Computer: 0</div>
     <div id="humanScore";>You: 0</div>
+    <div id="computerRounds";>Computer Rounds: 0</div>
+    <div id="humanRounds";>You Rounds: 0</div>
     <p></p>
     <script>
-        const input = document.querySelector(".rock", ".paper", "scissors");
-        const para = document.querySelector(`p`);
-        let computerScoreDisplay = document.querySelector("#computerScore");
-        let humanScoreDisplay = document.querySelector("#humanScore");
-        /* value is updated with each win */
-        let computerScoreValue = 0;
-        let humanScoreValue = 0;
+       const para = document.querySelector("p");
+  const computerScoreDisplay = document.querySelector("#computerScore");
+  const humanScoreDisplay = document.querySelector("#humanScore");
+  const humanRoundsDisplay = document.querySelector("#humanRounds");
+  const computerRoundsDisplay = document.querySelector("#computerRounds");
 
-        /* make the variations */
-        let items = ["Rock", "Paper", "Scissors"];
-        function randomSelect (items){
-        const random = Math.floor(Math.random()*items.length);
-        return items[random];
-        }
-        /* when a button is pressed a random word selector run for the 3 words */
-        document.querySelector(".rock").addEventListener("click", () => {
-            /* save the results to variables */
-            let buttonPressed = "Rock";
-            let aiSelection = randomSelect (items)
-            /* rock>paper>scissors>rock */
-            if (aiSelection===buttonPressed){
-                para.textContent = "ROCK! Draw, try again sucka!";
-                computerScoreValue++;
-                humanScoreValue++;
-                 /* display the result you win or you lose */
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            } else {if(aiSelection==="Paper"){                
-                para.textContent = "PAPER! HAHA you lose! and you smell like a dingus!";
-                computerScoreValue++;
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-            } else{
-                para.textContent = "SCISSORS! You got lucky and beat me this time... loser...";
-                humanScoreValue++;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            }}
-        })
-         document.querySelector(".paper").addEventListener("click", () => {
-            let buttonPressed = "Paper";
-            let aiSelection = randomSelect (items)
-            if (aiSelection===buttonPressed){
-                para.textContent = "PAPER! Draw, try again sucka!";
-                computerScoreValue++;
-                humanScoreValue++;
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            } else {if(aiSelection==="Scissors"){
-                para.textContent = "SCISSORS! HAHA you lose! and you smell like a dingus!";
-                computerScoreValue++;
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-            } else{
-                para.textContent = "ROCK! You got lucky and beat me this time... loser...";
-                humanScoreValue++;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            }}
-        })
-        document.querySelector(".scissors").addEventListener("click", () => {
-            let buttonPressed = "Scissors";
-            let aiSelection = randomSelect (items)
-            if (aiSelection===buttonPressed){
-                para.textContent = "SCISSORS! Draw, try again sucka!";
-                computerScoreValue++;
-                humanScoreValue++;
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            } else {if(aiSelection==="Rock"){
-                para.textContent = "ROCK! HAHA you lose! and you smell like a dingus!";
-                computerScoreValue++;
-                computerScoreDisplay.textContent = "Computer: "+computerScoreValue;
-            } else{
-                para.textContent = "PAPER! You got lucky and beat me this time... loser...";
-                humanScoreValue++;
-                humanScoreDisplay.textContent = "You: "+humanScoreValue;
-            }}
-        })
-        
+  let computerScoreValue = 0;
+  let humanScoreValue = 0;
+  let computerRoundsValue = 0;
+  let humanRoundsValue = 0;
+  const items = ["Rock", "Paper", "Scissors"];
+
+  function randomSelect(items) {
+    const random = Math.floor(Math.random() * items.length);
+    return items[random];
+  }
+
+  function playRound(playerChoice) {
+    const aiSelection = randomSelect(items);
+
+    if (aiSelection === playerChoice) {
+      para.textContent = `${playerChoice}! Draw, try again sucka!`;
+      computerScoreValue++;
+      humanScoreValue++;
+    } else if (
+      (aiSelection === "Paper" && playerChoice === "Rock") ||
+      (aiSelection === "Scissors" && playerChoice === "Paper") ||
+      (aiSelection === "Rock" && playerChoice === "Scissors")
+    ) {
+      para.textContent = `${aiSelection}! HAHA you lose! and you smell like a dingus!`;
+      computerScoreValue++;
+    } else {
+      para.textContent = `${aiSelection}! You got lucky and beat me this time... loser...`;
+      humanScoreValue++;
+    }
+
+    // update both displays
+    computerScoreDisplay.textContent = "Computer: " + computerScoreValue;
+    humanScoreDisplay.textContent = "You: " + humanScoreValue;
+    computerRoundsDisplay.textContent = "Computer: " + computerRoundsValue;
+    humanRoundsDisplay.textContent = "You: " + humanRoundsValue;
+
+    // check scores after every round
+    if (computerScoreValue === 5) {
+      para.textContent = "I win this round!";
+      computerRoundsValue++;
+      resetScores();
+    }
+
+    if (humanScoreValue === 5) {
+      para.textContent = "You win this round!";
+      humanRoundsValue++;
+      resetScores();
+    }
+  }
+
+  function resetScores() {
+    computerScoreValue = 0;
+    humanScoreValue = 0;
+    computerScoreDisplay.textContent = "Computer: 0";
+    humanScoreDisplay.textContent = "You: 0";
+  }
+
+  // Add one listener per button, reusing the same logic
+  document.querySelector(".rock").addEventListener("click", () => playRound("Rock"));
+  document.querySelector(".paper").addEventListener("click", () => playRound("Paper"));
+  document.querySelector(".scissors").addEventListener("click", () => playRound("Scissors"));
     </script>
 </body>
 </html>
