@@ -20,72 +20,72 @@
     <p></p>
     <script>
        const para = document.querySelector("p");
-  const computerScoreDisplay = document.querySelector("#computerScore");
-  const humanScoreDisplay = document.querySelector("#humanScore");
-  const humanRoundsDisplay = document.querySelector("#humanRounds");
-  const computerRoundsDisplay = document.querySelector("#computerRounds");
+        const computerScoreDisplay = document.querySelector("#computerScore");
+        const humanScoreDisplay = document.querySelector("#humanScore");
+        const humanRoundsDisplay = document.querySelector("#humanRounds");
+        const computerRoundsDisplay = document.querySelector("#computerRounds");
 
-  let computerScoreValue = 0;
-  let humanScoreValue = 0;
-  let computerRoundsValue = 0;
-  let humanRoundsValue = 0;
-  const items = ["Rock", "Paper", "Scissors"];
+        let computerScoreValue = 0;
+        let humanScoreValue = 0;
+        let computerRoundsValue = 0;
+        let humanRoundsValue = 0;
+        const items = ["Rock", "Paper", "Scissors"];
+        
+        function resetScores() {
+            computerScoreValue = 0;
+            humanScoreValue = 0;
+            computerScoreDisplay.textContent = "Computer: 0";
+            humanScoreDisplay.textContent = "You: 0";
+        }
 
-  function randomSelect(items) {
-    const random = Math.floor(Math.random() * items.length);
-    return items[random];
-  }
+        function randomSelect(items) {
+            const random = Math.floor(Math.random() * items.length);
+            return items[random];
+        }
 
-  function playRound(playerChoice) {
-    const aiSelection = randomSelect(items);
+        function playRound(playerChoice) {
+            const aiSelection = randomSelect(items);
 
-    if (aiSelection === playerChoice) {
-      para.textContent = `${playerChoice}! Draw, try again sucka!`;
-      computerScoreValue++;
-      humanScoreValue++;
-    } else if (
-      (aiSelection === "Paper" && playerChoice === "Rock") ||
-      (aiSelection === "Scissors" && playerChoice === "Paper") ||
-      (aiSelection === "Rock" && playerChoice === "Scissors")
-    ) {
-      para.textContent = `${aiSelection}! HAHA you lose! and you smell like a dingus!`;
-      computerScoreValue++;
-    } else {
-      para.textContent = `${aiSelection}! You got lucky and beat me this time... loser...`;
-      humanScoreValue++;
-    }
+            if (aiSelection === playerChoice) {
+            para.textContent = `${playerChoice}! Draw, try again sucka!`;
+            computerScoreValue++;
+            humanScoreValue++;
+            } else if (
+            (aiSelection === "Paper" && playerChoice === "Rock") ||
+            (aiSelection === "Scissors" && playerChoice === "Paper") ||
+            (aiSelection === "Rock" && playerChoice === "Scissors")
+            ) {
+            para.textContent = `${aiSelection}! HAHA you lose! and you smell like a dingus!`;
+            computerScoreValue++;
+            } else {
+            para.textContent = `${aiSelection}! You got lucky and beat me this time... loser...`;
+            humanScoreValue++;
+            }
 
-    // update both displays
-    computerScoreDisplay.textContent = "Computer: " + computerScoreValue;
-    humanScoreDisplay.textContent = "You: " + humanScoreValue;
-    computerRoundsDisplay.textContent = "Computer: " + computerRoundsValue;
-    humanRoundsDisplay.textContent = "You: " + humanRoundsValue;
+            // update both displays
+            computerScoreDisplay.textContent = "Computer: " + computerScoreValue;
+            humanScoreDisplay.textContent = "You: " + humanScoreValue;
+            computerRoundsDisplay.textContent = "Computer: " + computerRoundsValue;
+            humanRoundsDisplay.textContent = "You: " + humanRoundsValue;
 
-    // check scores after every round
-    if (computerScoreValue === 5) {
-      para.textContent = "I win this round!";
-      computerRoundsValue++;
-      resetScores();
-    }
+            // check scores after every round
+             if (computerScoreValue === 5) {
+            para.textContent = "I win this round!";
+            computerRoundsValue++;
+            resetScores();
+            }
 
-    if (humanScoreValue === 5) {
-      para.textContent = "You win this round!";
-      humanRoundsValue++;
-      resetScores();
-    }
-  }
+            if (humanScoreValue === 5) {
+            para.textContent = "You win this round!";
+            humanRoundsValue++;
+            resetScores();
+            } 
+        }
 
-  function resetScores() {
-    computerScoreValue = 0;
-    humanScoreValue = 0;
-    computerScoreDisplay.textContent = "Computer: 0";
-    humanScoreDisplay.textContent = "You: 0";
-  }
-
-  // Add one listener per button, reusing the same logic
-  document.querySelector(".rock").addEventListener("click", () => playRound("Rock"));
-  document.querySelector(".paper").addEventListener("click", () => playRound("Paper"));
-  document.querySelector(".scissors").addEventListener("click", () => playRound("Scissors"));
+        // Add one listener per button, reusing the same logic
+        document.querySelector(".rock").addEventListener("click", () => playRound("Rock"));
+        document.querySelector(".paper").addEventListener("click", () => playRound("Paper"));
+        document.querySelector(".scissors").addEventListener("click", () => playRound("Scissors"));
     </script>
 </body>
 </html>
